@@ -2,7 +2,6 @@
 
 <hr>
 
-
 ### Diff between C++ and Java
 
 | CPP      | Java         |
@@ -41,10 +40,48 @@
     }
     ```
 
+- `gcd(a, b)` -> gives gcd_value.
+
+- `assert(s.size() == n);` -> perform validation.
+
+- **Strings**
+    ```cpp
+    string s("GeeksforGeeks");
+    cout << s[4];
+    cout << s.at(4);
+    s.substr(1, 5);
+    s.find("For");
+    s.find_first_of('s');
+    s.find_last_of('s');
+    ```
+
+- **Pairs** let us combine two distinct values into a single entity.
+    ```cpp
+    pair<int, int> p = make_pair(1, 2);
+    pair<int, int> p = {1, 2}; //OR
+    int x = p.first;
+    int y = p.second;
+
+    pair<double, string> p;
+    ```
+    Pairs can be compared using standard comparison operators i.e., p1 < p2 compares the first elements and then the second elements if the first ones are equal.
+
+- **Tuples** offer a versatile solution for consolidating multiple values of diverse types. Unlike pairs, tuples can accommodate more than two elements, making them adaptable for various scenarios.
+    ```cpp
+    tuple<int, double, string> t(1, 3.14, "Hello");
+    tuple<int, double, string> t = make_tuple(1, 3.14, "Hello");
+
+    get<0>(t);  // Will fetch the 1st element of the tuple.
+    get<1>(t);  // Will fetch the 2nd element of the tuple. 
+    get<2>(t);  // Will fetch the 3rd element of the tuple. 
+    ```
+    Tuples can be compared using standard comparison operators i.e., t1 < t2 which compares elements lexicographically meaning first elements will be compared first, then second elements if first elements are equal, and then third elements if both first and second elements are equal and so on.
+
 - **Vectors** are like smart arrays. They store data just like arrays but unlike fixed sized arrays, vectors can grow or shrink by themselves.
 
-    - `vector<int> v` -> declaration of vector
-    - `v.size()` -> size
+    - `vector<int> v` -> declaration of vector with no initial size
+    - `vector<int> v(n)` -> initial size defined so can use a loop to fill values at the correct indices. If use **push_back** method then it will add additional values; size will be more than n
+    - `v.size()` -> size of vector
     - `v.push_back(x)` -> inserts an element x at the back of the vector
     - `v.pop_back()` -> removes the last element from the vector
     - `int ith_element = v[i]` 
@@ -98,7 +135,7 @@
 
     - `is_sorted(v.begin(), v.end())` -> check if vector is sorted.
 
-    - `reverse(a.begin(), a.end());` -> reverse a vector
+    - `reverse(a.begin(), a.end())` -> reverse a vector
 
     - **Sorting**
         ```cpp
@@ -136,3 +173,121 @@
             //upper_bound() returns an iterator pointing to the first element in the range that is greater than the given value.
             auto it = upper_bound(vec.begin(), vec.end(), 2);  // Finds the first element greater than 2 in vec
         ```
+
+    - `copy()` is used to copy elements from one range to another.
+        ```cpp
+        vector<int> source = {1, 2, 3, 4, 5};
+        vector<int> destination(5);
+        copy(source.begin(), source.end(), destination.begin()); 
+        ```
+
+    - `fill(vec.begin(), vec.end(), 42);` -> fill() assigns a specified value to all elements in a range.
+
+    - iota() assigns increasing values to a range starting from a specified value. `iota(vec.begin(), vec.end(), 1);  // Assigns values 1, 2, 3, 4, 5 to vec`
+
+    - `next_permutation(vec.begin(), vec.end())` -> next_permutation() rearranges the elements in a range into the next lexicographically greater permutation. If the current permutation is the largest possible, it rearranges the elements to the smallest possible permutation and returns false, otherwise returns true. 
+
+    - `prev_permutation(vec.begin(), vec.end())` -> prev_permutation() rearranges the elements in a range into the next lexicographically smaller permutation.
+
+    - 
+
+
+- **Sets** store unique elements.
+    ```cpp
+    set<int> s;
+    
+    int sz = s.size();
+    s.insert(x);
+    s.erase(x);
+    
+    auto it = s.find(x); //This returns an iterator to the element with a value equal to x. If x is not found, the iterator points to the end of the set.
+    
+    if (s.count(x)) //This checks if an element with value x exists in the set. Returns 1 if found, 0 otherwise.
+
+
+    for (auto it = s.begin(); it != s.end(); ++it) {
+    // Access the current element using *it
+    }
+    ```
+
+    - You cant access elements by index in set.
+
+
+- **Maps** store key-value pairs.
+    ```cpp
+    map<string, int> m;
+    int sz = m.size();
+    m.insert(make_pair(key, value));
+    m.erase(key);
+    auto it = m.find(key);
+    if (m.count(key))
+    for (auto it = m.begin(); it != m.end(); ++it) {
+        // Access the current element using *it
+    }
+    // or using range-based iterator
+    for(auto &it: m) {
+    // it.first provides key, it.second provides value
+    }
+
+    //modify value
+    m[key] = value;
+    ```
+
+- **Unordered Map** -> Like map, each key in unordered_map is unique, but unlike map, unordered_map does not maintain the order of keys and values. Instead, it uses a hash table to store and retrieve elements, making its operations generally faster than map. 
+    ```cpp
+    unordered_map<string, int> um;
+    int sz = um.size();
+    um.insert(make_pair(key, value));
+    um.erase(key);
+    auto it = um.find(key);
+    if (um.count(key))
+    for (auto it = um.begin(); it != um.end(); ++it) {
+        // Access the current element using *it
+    }
+    // or using range-based iterator
+    for(auto &it: um) {
+    // it.first provides key, it.second provides value
+    }
+    ```
+
+    **Comparison between map and unordered_map:**
+    - Ordering:
+
+        - map: Maintains order based on keys.
+        - unordered_map: Does not maintain any order.
+
+    - Implementation:
+
+        - map: Typically implemented as a balanced binary search tree.
+        - unordered_map: Implemented as a hash table.
+        
+    - Usage:
+
+        - Use map when you need to maintain order or perform operations that require sorted data.
+        - Use unordered_map when you need faster average access times and order is not a concern.
+
+- **Multiset** allows duplicate elements, meaning you can have multiple occurrences of the same value in the container. This feature makes it suitable for scenarios where you need to keep track of the frequency of elements or store multiple items with identical values. Multiset also maintains a strict order of elements based on their values, similar to set.
+    ```cpp
+    multiset<int> ms;
+    int sz = ms.size();
+    ms.insert(x);
+    s.erase(x);
+    auto it = s.find(x);
+    if (s.count(x))
+    for (auto it = ms.begin(); it != ms.end(); ++it) {
+        // Access the current element using *it
+    }
+    ```
+
+- **Unordered Set** designed for efficient storage and retrieval of unique elements. Unlike Set, which uses a balanced binary search tree, Unordered Set employs a hash table data structure, allowing for constant-time average complexity or O(1) for insertions, deletions, and searches.
+    ```cpp
+    unordered_set<int> uset;
+    int sz = uset.size();
+    uset.insert(x);
+    uset.erase(x);
+    auto it = uset.find(x);
+    if (uset.count(x))
+    for (auto it = uset.begin(); it != uset.end(); ++it) {
+        // Access the current element using *it
+    }
+    ```
