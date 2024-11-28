@@ -41,18 +41,27 @@
     ```
 
 - `gcd(a, b)` -> gives gcd_value.
+- `sqrt(x)`
+- `ceil(x)`
+- `floor(x)`
+- `pow(x, n)`
 
 - `assert(s.size() == n);` -> perform validation.
 
 - **Strings**
     ```cpp
     string s("GeeksforGeeks");
+    string s = "heelo";
     cout << s[4];
     cout << s.at(4);
+    s.length();
     s.substr(1, 5);
     s.find("For");
     s.find_first_of('s');
     s.find_last_of('s');
+    s.append("world");
+    s1.compare(s2); -> returns 0 if both equal
+    s.empty();
     ```
 
 - **Pairs** let us combine two distinct values into a single entity.
@@ -191,6 +200,18 @@
 
     - 
 
+- **List** implements the doubly linked list data structure.
+  ```cpp
+  list<int> l1 = { 1, 5, 9, 1, 4, 6 };
+  l1.front()
+  l1.insert(l1.begin(), 5);
+  l1.erase(l1.begin());
+  l1.size()
+  l1.push_back()
+  l1.pop_back()
+  l1.push_front()
+  l1.pop_front()
+  ```
 
 - **Sets** store unique elements.
     ```cpp
